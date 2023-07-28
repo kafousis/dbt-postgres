@@ -11,11 +11,16 @@ docker-compose up
 # load csv files
 dbt seed
 
+# generate sql
+dbt compile 
+dbt compile --model <model>
+
 # run models
 dbt run
+dbt run --select <model>
 
 # run tests
-dbt test
+dbt test --select <model>
 
 # generate & serve docs
 dbt docs generate

@@ -6,8 +6,8 @@ services:
     build: .
     image: dbt/jaffle-shop:1.5.3
     volumes:
-      - ./jaffle-shop:/jaffle-shop
-      - ./profiles.yml:/root/.dbt/profiles.yml
+      - ./:/jaffle-shop
+      - ./profiles/profiles.yml:/root/.dbt/profiles.yml
     ports:
       - "8080:8080"
     depends_on:
