@@ -1,0 +1,53 @@
+version: '3.5'
+
+services:
+
+  dbt:
+    build: .
+    image: dbt/jaffle-shop:1.5.3
+    volumes:
+      - ./jaffle-shop:/jaffle-shop
+      - ./profiles.yml:/root/.dbt/profiles.yml
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dbt-net
+
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+    networks:
+      - dbt-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - dbt-net
+
+networks:
+  dbt-net:
+
+volumes:
+  postgres:
+  pgadmin:
