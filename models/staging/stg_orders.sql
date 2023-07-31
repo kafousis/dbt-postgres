@@ -1,14 +1,4 @@
-with source as (
-
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ ref('raw_orders') }}
-
-),
-
-renamed as (
+with orders as (
 
     select
         id as order_id,
@@ -16,8 +6,7 @@ renamed as (
         order_date,
         status
 
-    from source
-
+    from {{ source('jaffle_shop', 'raw_orders') }}
 )
 
-select * from renamed
+select * from orders

@@ -5,26 +5,11 @@
 }}
 
 with customers as (
-
-    select
-        id as customer_id,
-        first_name,
-        last_name
-
-    from public.raw_customers
-
+    select * from {{ ref('stg_customers') }}
 ),
 
 orders as (
-
-    select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
-
-    from public.raw_orders
-
+    select * from {{ ref('stg_orders') }}
 ),
 
 customer_orders as (
@@ -39,7 +24,6 @@ customer_orders as (
     from orders
 
     group by 1
-
 ),
 
 
@@ -56,7 +40,6 @@ final as (
     from customers
 
     left join customer_orders using (customer_id)
-
 )
 
 select * from final

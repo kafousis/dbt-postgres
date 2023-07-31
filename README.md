@@ -6,6 +6,10 @@ docker-compose build
 docker-compose up
 ```
 
+### Work from VS Code
+- DevContainers Plugin is used to connect to docker container
+- dbt Power User Plugin is used to work with dbt in VS Code
+
 ### dbt commands
 ```bash
 # load csv files
