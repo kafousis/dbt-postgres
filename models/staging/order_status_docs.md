@@ -1,4 +1,4 @@
-{% docs orders_status %}
+{% docs order_status %}
 
 Orders can be one of the following statuses:
 

@@ -10,16 +10,16 @@ sources:
           - name: id
             tests:
               - unique
-              - not null
+              - not_null
       - name: raw_orders
         columns:
           - name: id
             tests:
               - unique
-              - not null
+              - not_null
       - name: raw_payments
         columns:
-        - name: id
-          tests:
-            - unique
-            - not null
+          - name: id
+            tests:
+              - unique
+              - not_null
