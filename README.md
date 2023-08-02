@@ -23,8 +23,14 @@ dbt compile --model <model>
 dbt run
 dbt run --select <model>
 
-# run tests
+# run tests over specific model
 dbt test --select <model>
+
+# run tests over specific source
+dbt test --select source:<source>
+
+# run,test in DAG order
+dbt build
 
 # generate & serve docs
 dbt docs generate
